@@ -1,12 +1,24 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional
+from enum import Enum
+
+class TaskStatus(str, Enum):
+    NEW = "new"
+    IN_PROGRESS = "in_progress"
+    DONE = "done"
+    CANCELLED = "cancelled"
+
+class TaskPriority(str, Enum):
+    LOW = "low"
+    MEDIUM = "medium"
+    HIGH = "high"
 
 class TaskBase(BaseModel):
     title: str = Field(..., min_length=1, max_length=200)
     description: Optional[str] = None
-    status: str = Field(default="new", pattern="^(new|in_progress|done|cancelled)$")
-    priority: str = Field(default="medium", pattern="^(low|medium|high)$")
+    status: TaskStatus = Field(default=TaskStatus.NEW)
+    priority: TaskPriority = Field(default=TaskPriority.MEDIUM)
     assignee: Optional[str] = None
 
 class TaskCreate(TaskBase):
@@ -15,9 +27,12 @@ class TaskCreate(TaskBase):
 class TaskUpdate(BaseModel):
     title: Optional[str] = Field(None, min_length=1, max_length=200)
     description: Optional[str] = None
-    status: Optional[str] = Field(None, pattern="^(new|in_progress|done|cancelled)$")
-    priority: Optional[str] = Field(None, pattern="^(low|medium|high)$")
+    status: Optional[TaskStatus] = None
+    priority: Optional[TaskPriority] = None
     assignee: Optional[str] = None
+
+class TaskStatusUpdate(BaseModel):
+    status: TaskStatus
 
 class TaskResponse(TaskBase):
     id: int
