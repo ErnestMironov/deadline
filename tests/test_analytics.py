@@ -1,7 +1,7 @@
 from fastapi import status
 
-def test_get_analytics_empty(client):
-    response = client.get("/analytics/tasks")
+def test_get_analytics_empty(client, auth_headers):
+    response = client.get("/analytics/tasks", headers=auth_headers)
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert data["total_tasks"] == 0
@@ -11,13 +11,13 @@ def test_get_analytics_empty(client):
     assert data["status_percentage"] == {}
     assert data["priority_percentage"] == {}
 
-def test_get_analytics_with_tasks(client):
-    client.post("/tasks/", json={"title": "Task 1", "status": "new", "priority": "high", "assignee": "Alice"})
-    client.post("/tasks/", json={"title": "Task 2", "status": "new", "priority": "medium", "assignee": "Bob"})
-    client.post("/tasks/", json={"title": "Task 3", "status": "in_progress", "priority": "high", "assignee": "Alice"})
-    client.post("/tasks/", json={"title": "Task 4", "status": "done", "priority": "low", "assignee": "Charlie"})
+def test_get_analytics_with_tasks(client, auth_headers):
+    client.post("/tasks/", json={"title": "Task 1", "status": "new", "priority": "high", "assignee": "Alice"}, headers=auth_headers)
+    client.post("/tasks/", json={"title": "Task 2", "status": "new", "priority": "medium", "assignee": "Bob"}, headers=auth_headers)
+    client.post("/tasks/", json={"title": "Task 3", "status": "in_progress", "priority": "high", "assignee": "Alice"}, headers=auth_headers)
+    client.post("/tasks/", json={"title": "Task 4", "status": "done", "priority": "low", "assignee": "Charlie"}, headers=auth_headers)
     
-    response = client.get("/analytics/tasks")
+    response = client.get("/analytics/tasks", headers=auth_headers)
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     
@@ -44,17 +44,21 @@ def test_get_analytics_with_tasks(client):
     assert data["status_percentage"]["in_progress"] == 25.0
     assert data["status_percentage"]["done"] == 25.0
 
-def test_get_analytics_chart(client):
-    client.post("/tasks/", json={"title": "Task 1", "status": "new", "priority": "high"})
-    client.post("/tasks/", json={"title": "Task 2", "status": "in_progress", "priority": "medium"})
+def test_get_analytics_chart(client, auth_headers):
+    client.post("/tasks/", json={"title": "Task 1", "status": "new", "priority": "high"}, headers=auth_headers)
+    client.post("/tasks/", json={"title": "Task 2", "status": "in_progress", "priority": "medium"}, headers=auth_headers)
     
-    response = client.get("/analytics/tasks/chart")
+    response = client.get("/analytics/tasks/chart", headers=auth_headers)
     assert response.status_code == status.HTTP_200_OK
     assert response.headers["content-type"] == "image/png"
     assert len(response.content) > 0
 
-def test_get_analytics_chart_empty(client):
-    response = client.get("/analytics/tasks/chart")
+def test_get_analytics_chart_empty(client, auth_headers):
+    response = client.get("/analytics/tasks/chart", headers=auth_headers)
     assert response.status_code == status.HTTP_200_OK
     assert response.headers["content-type"] == "image/png"
     assert len(response.content) > 0
+
+def test_unauthorized_analytics(client):
+    response = client.get("/analytics/tasks")
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
