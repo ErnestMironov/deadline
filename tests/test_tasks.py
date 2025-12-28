@@ -101,3 +101,92 @@ def test_update_task_status(client):
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert data["status"] == "done"
+
+def test_filter_tasks_by_status(client):
+    client.post("/tasks/", json={"title": "Task 1", "status": "new", "priority": "medium"})
+    client.post("/tasks/", json={"title": "Task 2", "status": "in_progress", "priority": "high"})
+    client.post("/tasks/", json={"title": "Task 3", "status": "new", "priority": "low"})
+    
+    response = client.get("/tasks/?status=new")
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+    assert len(data) == 2
+    assert all(task["status"] == "new" for task in data)
+
+def test_filter_tasks_by_priority(client):
+    client.post("/tasks/", json={"title": "Task 1", "status": "new", "priority": "high"})
+    client.post("/tasks/", json={"title": "Task 2", "status": "new", "priority": "medium"})
+    client.post("/tasks/", json={"title": "Task 3", "status": "new", "priority": "high"})
+    
+    response = client.get("/tasks/?priority=high")
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+    assert len(data) == 2
+    assert all(task["priority"] == "high" for task in data)
+
+def test_filter_tasks_by_assignee(client):
+    client.post("/tasks/", json={"title": "Task 1", "status": "new", "priority": "medium", "assignee": "Alice"})
+    client.post("/tasks/", json={"title": "Task 2", "status": "new", "priority": "medium", "assignee": "Bob"})
+    client.post("/tasks/", json={"title": "Task 3", "status": "new", "priority": "medium", "assignee": "Alice"})
+    
+    response = client.get("/tasks/?assignee=Alice")
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+    assert len(data) == 2
+    assert all(task["assignee"] == "Alice" for task in data)
+
+def test_filter_tasks_multiple_filters(client):
+    client.post("/tasks/", json={"title": "Task 1", "status": "new", "priority": "high", "assignee": "Alice"})
+    client.post("/tasks/", json={"title": "Task 2", "status": "in_progress", "priority": "high", "assignee": "Alice"})
+    client.post("/tasks/", json={"title": "Task 3", "status": "new", "priority": "low", "assignee": "Bob"})
+    
+    response = client.get("/tasks/?status=new&priority=high&assignee=Alice")
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+    assert len(data) == 1
+    assert data[0]["status"] == "new"
+    assert data[0]["priority"] == "high"
+    assert data[0]["assignee"] == "Alice"
+
+def test_sort_tasks_by_created_at(client):
+    task1 = client.post("/tasks/", json={"title": "Task 1", "status": "new", "priority": "medium"}).json()
+    task2 = client.post("/tasks/", json={"title": "Task 2", "status": "new", "priority": "medium"}).json()
+    task3 = client.post("/tasks/", json={"title": "Task 3", "status": "new", "priority": "medium"}).json()
+    
+    response = client.get("/tasks/?sort_by=id&sort_order=asc")
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+    assert len(data) == 3
+    ids = [task["id"] for task in data]
+    assert ids == sorted(ids)
+    
+    response_desc = client.get("/tasks/?sort_by=id&sort_order=desc")
+    assert response_desc.status_code == status.HTTP_200_OK
+    data_desc = response_desc.json()
+    ids_desc = [task["id"] for task in data_desc]
+    assert ids_desc == sorted(ids_desc, reverse=True)
+
+def test_pagination(client):
+    for i in range(5):
+        client.post("/tasks/", json={"title": f"Task {i+1}", "status": "new", "priority": "medium"})
+    
+    response = client.get("/tasks/?skip=0&limit=2")
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+    assert len(data) == 2
+    
+    response_skip = client.get("/tasks/?skip=2&limit=2")
+    assert response_skip.status_code == status.HTTP_200_OK
+    data_skip = response_skip.json()
+    assert len(data_skip) == 2
+
+def test_pagination_with_filter(client):
+    client.post("/tasks/", json={"title": "Task 1", "status": "new", "priority": "high"})
+    client.post("/tasks/", json={"title": "Task 2", "status": "new", "priority": "high"})
+    client.post("/tasks/", json={"title": "Task 3", "status": "in_progress", "priority": "high"})
+    
+    response = client.get("/tasks/?status=new&skip=0&limit=1")
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+    assert len(data) == 1
+    assert data[0]["status"] == "new"
