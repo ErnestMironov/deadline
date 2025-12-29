@@ -158,12 +158,6 @@ const router = useRouter();
 const { logout } = useAuth();
 const { isWindowsTheme, toggleTheme } = useTheme();
 
-const title = computed(() => {
-	if (route.name === "home") return "Kanban Board";
-	if (route.name === "analytics") return "Analytics";
-	return "Task Tracker";
-});
-
 const showAnalyticsButton = computed(() => route.name !== "analytics");
 const showKanbanButton = computed(() => route.name === "analytics");
 </script>

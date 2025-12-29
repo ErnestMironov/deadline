@@ -3,7 +3,7 @@
 		:class="
 			cn(
 				'rounded-lg border bg-card text-card-foreground shadow-sm card-wrapper',
-				$attrs.class
+				($attrs.class as string | undefined)
 			)
 		"
 	>

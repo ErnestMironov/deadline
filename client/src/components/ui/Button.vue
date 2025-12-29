@@ -3,7 +3,7 @@
 		:class="
 			cn(
 				buttonVariants({ variant: props.variant, size: props.size }),
-				$attrs.class
+				($attrs.class as string | undefined)
 			)
 		"
 		v-bind="$attrs"

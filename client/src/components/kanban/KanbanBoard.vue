@@ -41,8 +41,7 @@
 import { ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useKanban } from "@/composables/useKanban";
-import { TaskStatus } from "@/types/task";
-import type { TaskResponse } from "@/types/task";
+import type { TaskStatus, TaskResponse } from "@/types/task";
 import KanbanColumn from "./KanbanColumn.vue";
 import TaskDialog from "./TaskDialog.vue";
 import TaskViewDialog from "./TaskViewDialog.vue";

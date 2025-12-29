@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { tasksApi } from '@/api/tasks'
-import type { TaskResponse, TaskCreate, TaskUpdate, TaskStatusUpdate, TaskFilters } from '@/types/task'
-import { TaskStatus } from '@/types/task'
+import type { TaskResponse, TaskCreate, TaskUpdate, TaskFilters, TaskStatus } from '@/types/task'
 
 export const useTasksStore = defineStore('tasks', () => {
   const tasks = ref<TaskResponse[]>([])
@@ -83,10 +82,10 @@ export const useTasksStore = defineStore('tasks', () => {
     task.status = newStatus
 
     try {
-      await tasksApi.updateTaskStatus(taskId, { status: newStatus })
+      const updatedTask = await tasksApi.updateTaskStatus(taskId, { status: newStatus })
       const index = tasks.value.findIndex((t) => t.id === taskId)
       if (index !== -1) {
-        tasks.value[index] = { ...tasks.value[index], status: newStatus }
+        tasks.value[index] = updatedTask
       }
     } catch (err) {
       task.status = oldStatus

@@ -1,15 +1,19 @@
-export enum TaskStatus {
-  NEW = 'new',
-  IN_PROGRESS = 'in_progress',
-  DONE = 'done',
-  CANCELLED = 'cancelled'
-}
+export const TaskStatus = {
+  NEW: 'new',
+  IN_PROGRESS: 'in_progress',
+  DONE: 'done',
+  CANCELLED: 'cancelled'
+} as const
 
-export enum TaskPriority {
-  LOW = 'low',
-  MEDIUM = 'medium',
-  HIGH = 'high'
-}
+export type TaskStatus = typeof TaskStatus[keyof typeof TaskStatus]
+
+export const TaskPriority = {
+  LOW: 'low',
+  MEDIUM: 'medium',
+  HIGH: 'high'
+} as const
+
+export type TaskPriority = typeof TaskPriority[keyof typeof TaskPriority]
 
 export interface TaskBase {
   title: string
@@ -39,20 +43,24 @@ export interface TaskResponse extends TaskBase {
   updated_at: string
 }
 
-export enum SortBy {
-  ID = 'id',
-  TITLE = 'title',
-  CREATED_AT = 'created_at',
-  UPDATED_AT = 'updated_at',
-  PRIORITY = 'priority',
-  STATUS = 'status',
-  ASSIGNEE = 'assignee'
-}
+export const SortBy = {
+  ID: 'id',
+  TITLE: 'title',
+  CREATED_AT: 'created_at',
+  UPDATED_AT: 'updated_at',
+  PRIORITY: 'priority',
+  STATUS: 'status',
+  ASSIGNEE: 'assignee'
+} as const
 
-export enum SortOrder {
-  ASC = 'asc',
-  DESC = 'desc'
-}
+export type SortBy = typeof SortBy[keyof typeof SortBy]
+
+export const SortOrder = {
+  ASC: 'asc',
+  DESC: 'desc'
+} as const
+
+export type SortOrder = typeof SortOrder[keyof typeof SortOrder]
 
 export interface TaskFilters {
   status?: TaskStatus

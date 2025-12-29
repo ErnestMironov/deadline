@@ -41,8 +41,8 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable'
 import { watch, ref, computed } from 'vue'
-import type { TaskResponse } from '@/types/task'
-import { TaskStatus } from '@/types/task'
+import type { TaskResponse, TaskStatus } from '@/types/task'
+import { TaskStatus as TaskStatusEnum } from '@/types/task'
 import KanbanCard from './KanbanCard.vue'
 import Badge from '@/components/ui/Badge.vue'
 
@@ -62,10 +62,10 @@ watch(() => props.tasks, (newTasks) => {
 
 const statusColorDot = computed(() => {
   const colors: Record<TaskStatus, string> = {
-    [TaskStatus.NEW]: 'bg-blue-500',
-    [TaskStatus.IN_PROGRESS]: 'bg-yellow-500',
-    [TaskStatus.DONE]: 'bg-green-500',
-    [TaskStatus.CANCELLED]: 'bg-gray-500',
+    [TaskStatusEnum.NEW]: 'bg-blue-500',
+    [TaskStatusEnum.IN_PROGRESS]: 'bg-yellow-500',
+    [TaskStatusEnum.DONE]: 'bg-green-500',
+    [TaskStatusEnum.CANCELLED]: 'bg-gray-500',
   }
   return colors[props.status] || 'bg-gray-500'
 })

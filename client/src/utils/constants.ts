@@ -1,15 +1,16 @@
-import { TaskStatus } from '@/types/task'
+import { TaskStatus as TaskStatusEnum } from '@/types/task'
+import type { TaskStatus } from '@/types/task'
 
 export const TASK_STATUSES: TaskStatus[] = [
-  TaskStatus.NEW,
-  TaskStatus.IN_PROGRESS,
-  TaskStatus.DONE,
-  TaskStatus.CANCELLED
+  TaskStatusEnum.NEW,
+  TaskStatusEnum.IN_PROGRESS,
+  TaskStatusEnum.DONE,
+  TaskStatusEnum.CANCELLED
 ]
 
 export const TASK_STATUS_LABELS: Record<TaskStatus, string> = {
-  [TaskStatus.NEW]: 'Новая',
-  [TaskStatus.IN_PROGRESS]: 'В работе',
-  [TaskStatus.DONE]: 'Выполнена',
-  [TaskStatus.CANCELLED]: 'Отменена'
+  [TaskStatusEnum.NEW]: 'Новая',
+  [TaskStatusEnum.IN_PROGRESS]: 'В работе',
+  [TaskStatusEnum.DONE]: 'Выполнена',
+  [TaskStatusEnum.CANCELLED]: 'Отменена'
 }

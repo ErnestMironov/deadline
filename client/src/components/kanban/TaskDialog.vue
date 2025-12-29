@@ -127,20 +127,20 @@
 							id="priority"
 							v-model="formData.priority"
 							:class="[
-								formData.priority === 'high'
+								formData.priority === TaskPriorityEnum.HIGH
 									? 'border-red-300 focus:border-red-400 focus:ring-red-200'
 									: '',
-								formData.priority === 'medium'
+								formData.priority === TaskPriorityEnum.MEDIUM
 									? 'border-yellow-300 focus:border-yellow-400 focus:ring-yellow-200'
 									: '',
-								formData.priority === 'low'
+								formData.priority === TaskPriorityEnum.LOW
 									? 'border-green-300 focus:border-green-400 focus:ring-green-200'
 									: '',
 							]"
 						>
-							<option value="low">Низкий</option>
-							<option value="medium">Средний</option>
-							<option value="high">Высокий</option>
+							<option :value="TaskPriorityEnum.LOW">Низкий</option>
+							<option :value="TaskPriorityEnum.MEDIUM">Средний</option>
+							<option :value="TaskPriorityEnum.HIGH">Высокий</option>
 						</Select>
 					</div>
 					<div class="space-y-2">
@@ -198,10 +198,10 @@
 						Статус
 					</label>
 					<Select id="status" v-model="formData.status">
-						<option value="new">Новая</option>
-						<option value="in_progress">В работе</option>
-						<option value="done">Выполнена</option>
-						<option value="cancelled">Отменена</option>
+						<option :value="TaskStatusEnum.NEW">Новая</option>
+						<option :value="TaskStatusEnum.IN_PROGRESS">В работе</option>
+						<option :value="TaskStatusEnum.DONE">Выполнена</option>
+						<option :value="TaskStatusEnum.CANCELLED">Отменена</option>
 					</Select>
 				</div>
 				<div
@@ -273,12 +273,10 @@
 import { ref, watch, onMounted } from "vue";
 import { useTasksStore } from "@/stores/tasks";
 import { authApi } from "@/api/auth";
-import type {
-	TaskResponse,
-	TaskCreate,
-	TaskUpdate,
-	TaskStatus,
-	TaskPriority,
+import type { TaskResponse, TaskStatus, TaskPriority } from "@/types/task";
+import {
+	TaskStatus as TaskStatusEnum,
+	TaskPriority as TaskPriorityEnum,
 } from "@/types/task";
 import type { UserResponse } from "@/types/auth";
 import Dialog from "@/components/ui/Dialog.vue";
@@ -318,9 +316,9 @@ const formData = ref<{
 }>({
 	title: "",
 	description: "",
-	priority: "medium",
+	priority: TaskPriorityEnum.MEDIUM,
 	assignee: "",
-	status: "new",
+	status: TaskStatusEnum.NEW,
 });
 
 async function loadUsers() {
@@ -332,7 +330,7 @@ async function loadUsers() {
 }
 
 watch(
-	() => [props.task, props.initialStatus],
+	() => [props.task, props.initialStatus] as const,
 	([task, initialStatus]) => {
 		if (task) {
 			formData.value = {
@@ -346,9 +344,9 @@ watch(
 			formData.value = {
 				title: "",
 				description: "",
-				priority: "medium",
+				priority: TaskPriorityEnum.MEDIUM,
 				assignee: "",
-				status: (initialStatus as TaskStatus) || "new",
+				status: (initialStatus as TaskStatus) || TaskStatusEnum.NEW,
 			};
 		}
 	},
@@ -387,7 +385,7 @@ async function handleSubmit() {
 				description: formData.value.description || null,
 				priority: formData.value.priority,
 				assignee: formData.value.assignee || null,
-				status: formData.value.status || "new",
+				status: formData.value.status || TaskStatusEnum.NEW,
 			});
 		}
 		emit("save");

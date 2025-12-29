@@ -203,8 +203,8 @@
 import { ref, computed, watch } from "vue";
 import { useRouter } from "vue-router";
 import { tasksApi } from "@/api/tasks";
-import type { TaskResponse } from "@/types/task";
-import { TaskPriority, TaskStatus } from "@/types/task";
+import type { TaskResponse, TaskPriority, TaskStatus } from "@/types/task";
+import { TaskPriority as TaskPriorityEnum, TaskStatus as TaskStatusEnum } from "@/types/task";
 import Dialog from "@/components/ui/Dialog.vue";
 import Button from "@/components/ui/Button.vue";
 import Badge from "@/components/ui/Badge.vue";
@@ -230,8 +230,8 @@ const error = ref<string | null>(null);
 const priorityVariant = computed(() => {
 	if (!task.value) return "secondary";
 	const priority = task.value.priority;
-	if (priority === TaskPriority.HIGH) return "destructive";
-	if (priority === TaskPriority.MEDIUM) return "default";
+	if (priority === TaskPriorityEnum.HIGH) return "destructive";
+	if (priority === TaskPriorityEnum.MEDIUM) return "default";
 	return "secondary";
 });
 
@@ -239,9 +239,9 @@ const priorityLabel = computed(() => {
 	if (!task.value) return "";
 	const priority = task.value.priority;
 	const labels: Record<TaskPriority, string> = {
-		[TaskPriority.LOW]: "Низкий",
-		[TaskPriority.MEDIUM]: "Средний",
-		[TaskPriority.HIGH]: "Высокий",
+		[TaskPriorityEnum.LOW]: "Низкий",
+		[TaskPriorityEnum.MEDIUM]: "Средний",
+		[TaskPriorityEnum.HIGH]: "Высокий",
 	};
 	return labels[priority] || priority;
 });
@@ -250,10 +250,10 @@ const statusLabel = computed(() => {
 	if (!task.value) return "";
 	const status = task.value.status;
 	const labels: Record<TaskStatus, string> = {
-		[TaskStatus.NEW]: "Новая",
-		[TaskStatus.IN_PROGRESS]: "В работе",
-		[TaskStatus.DONE]: "Выполнена",
-		[TaskStatus.CANCELLED]: "Отменена",
+		[TaskStatusEnum.NEW]: "Новая",
+		[TaskStatusEnum.IN_PROGRESS]: "В работе",
+		[TaskStatusEnum.DONE]: "Выполнена",
+		[TaskStatusEnum.CANCELLED]: "Отменена",
 	};
 	return labels[status] || status;
 });

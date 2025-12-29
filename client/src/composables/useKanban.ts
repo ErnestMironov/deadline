@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
 import { useTasksStore } from '@/stores/tasks'
-import { TaskStatus } from '@/types/task'
-import type { TaskFilters } from '@/types/task'
+import { TaskStatus as TaskStatusEnum } from '@/types/task'
+import type { TaskStatus, TaskFilters } from '@/types/task'
 import { TASK_STATUSES, TASK_STATUS_LABELS } from '@/utils/constants'
 
 export function useKanban() {
@@ -10,10 +10,10 @@ export function useKanban() {
 
   const tasksByStatus = computed(() => {
     const grouped: Record<TaskStatus, ReturnType<typeof tasksStore.getTasksByStatus>> = {
-      [TaskStatus.NEW]: [],
-      [TaskStatus.IN_PROGRESS]: [],
-      [TaskStatus.DONE]: [],
-      [TaskStatus.CANCELLED]: [],
+      [TaskStatusEnum.NEW]: [],
+      [TaskStatusEnum.IN_PROGRESS]: [],
+      [TaskStatusEnum.DONE]: [],
+      [TaskStatusEnum.CANCELLED]: [],
     }
 
     TASK_STATUSES.forEach((status) => {

@@ -113,7 +113,12 @@ const emit = defineEmits<{
 	"update:filters": [filters: TaskFilters];
 }>();
 
-const localFilters = ref<TaskFilters>({
+const localFilters = ref<{
+	assignee: string;
+	priority: string;
+	sort_by: string;
+	sort_order: string;
+}>({
 	assignee: props.filters.assignee || "",
 	priority: props.filters.priority || "",
 	sort_by: props.filters.sort_by || "",

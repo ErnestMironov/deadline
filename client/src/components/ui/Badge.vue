@@ -4,7 +4,7 @@
 			cn(
 				'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 badge-wrapper',
 				variantClasses[variant],
-				$attrs.class
+				($attrs.class as string | undefined)
 			)
 		"
 		v-bind="$attrs"
