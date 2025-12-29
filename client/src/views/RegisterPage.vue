@@ -1,7 +1,7 @@
 <template>
 	<div class="min-h-screen flex items-center justify-center bg-white">
 		<Card class="w-full max-w-md p-6">
-			<h1 class="text-2xl font-bold mb-6 text-center">Register</h1>
+			<h1 class="text-2xl font-bold mb-6 text-center">Регистрация</h1>
 			<RegisterForm />
 		</Card>
 	</div>

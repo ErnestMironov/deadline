@@ -16,5 +16,5 @@ const themeStore = useThemeStore();
 try {
 	app.mount("#app");
 } catch (error) {
-	console.error("Failed to mount app:", error);
+	console.error("Не удалось загрузить приложение:", error);
 }

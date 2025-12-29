@@ -1,13 +1,13 @@
 <template>
   <form @submit.prevent="handleSubmit" class="space-y-4">
     <div>
-      <label for="username" class="block text-sm font-medium mb-1">Username</label>
+      <label for="username" class="block text-sm font-medium mb-1">Имя пользователя</label>
       <Input
         id="username"
         v-model="username"
         type="text"
         required
-        placeholder="Enter your username"
+        placeholder="Введите имя пользователя"
       />
     </div>
     <div>
@@ -17,26 +17,26 @@
         v-model="email"
         type="email"
         required
-        placeholder="Enter your email"
+        placeholder="Введите email"
       />
     </div>
     <div>
-      <label for="password" class="block text-sm font-medium mb-1">Password</label>
+      <label for="password" class="block text-sm font-medium mb-1">Пароль</label>
       <Input
         id="password"
         v-model="password"
         type="password"
         required
-        placeholder="Enter your password"
+        placeholder="Введите пароль"
       />
     </div>
     <div v-if="error" class="text-sm text-destructive">{{ error }}</div>
     <Button type="submit" :disabled="loading" class="w-full">
-      {{ loading ? 'Registering...' : 'Register' }}
+      {{ loading ? 'Регистрация...' : 'Зарегистрироваться' }}
     </Button>
     <div class="text-center text-sm">
-      Already have an account?
-      <router-link to="/login" class="text-primary hover:underline">Login</router-link>
+      Уже есть аккаунт?
+      <router-link to="/login" class="text-primary hover:underline">Войти</router-link>
     </div>
   </form>
 </template>
@@ -61,7 +61,7 @@ async function handleSubmit() {
     const userData = { username: username.value, email: email.value, password: password.value }
     await register(userData)
   } catch (err) {
-    error.value = err instanceof Error ? err.message : 'Failed to register'
+    error.value = err instanceof Error ? err.message : 'Не удалось зарегистрироваться'
   } finally {
     loading.value = false
   }

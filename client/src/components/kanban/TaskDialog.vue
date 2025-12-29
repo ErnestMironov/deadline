@@ -40,7 +40,7 @@
 					</svg>
 				</div>
 				<h2 class="text-xl sm:text-2xl font-bold text-foreground">
-					{{ task ? "Edit Task" : "Create Task" }}
+					{{ task ? "Редактировать задачу" : "Создать задачу" }}
 				</h2>
 			</div>
 			<form @submit.prevent="handleSubmit" class="space-y-4 sm:space-y-5">
@@ -63,13 +63,13 @@
 								d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
 							/>
 						</svg>
-						Title
+						Название
 					</label>
 					<Input
 						id="title"
 						v-model="formData.title"
 						required
-						placeholder="Enter task title..."
+						placeholder="Введите название задачи..."
 						class="transition-all focus:border-primary/50 focus:ring-primary/20"
 					/>
 				</div>
@@ -92,12 +92,12 @@
 								d="M4 6h16M4 12h16M4 18h7"
 							/>
 						</svg>
-						Description
+						Описание
 					</label>
 					<textarea
 						id="description"
 						v-model="formData.description"
-						placeholder="Add a detailed description..."
+						placeholder="Добавьте подробное описание..."
 						class="flex min-h-[100px] w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all focus:border-primary/50 focus:ring-primary/20 resize-none"
 					/>
 				</div>
@@ -121,7 +121,7 @@
 									d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
 								/>
 							</svg>
-							Priority
+							Приоритет
 						</label>
 						<Select
 							id="priority"
@@ -138,9 +138,9 @@
 									: '',
 							]"
 						>
-							<option value="low">Low</option>
-							<option value="medium">Medium</option>
-							<option value="high">High</option>
+							<option value="low">Низкий</option>
+							<option value="medium">Средний</option>
+							<option value="high">Высокий</option>
 						</Select>
 					</div>
 					<div class="space-y-2">
@@ -162,10 +162,10 @@
 									d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
 								/>
 							</svg>
-							Assignee
+							Исполнитель
 						</label>
 						<Select id="assignee" v-model="formData.assignee">
-							<option value="">Unassigned</option>
+							<option value="">Не назначен</option>
 							<option
 								v-for="user in users"
 								:key="user.id"
@@ -195,13 +195,13 @@
 								d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
 							/>
 						</svg>
-						Status
+						Статус
 					</label>
 					<Select id="status" v-model="formData.status">
-						<option value="new">New</option>
-						<option value="in_progress">In Progress</option>
-						<option value="done">Done</option>
-						<option value="cancelled">Cancelled</option>
+						<option value="new">Новая</option>
+						<option value="in_progress">В работе</option>
+						<option value="done">Выполнена</option>
+						<option value="cancelled">Отменена</option>
 					</Select>
 				</div>
 				<div
@@ -229,7 +229,7 @@
 								d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
 							/>
 						</svg>
-						{{ deleting ? "Deleting..." : "Delete" }}
+						{{ deleting ? "Удаление..." : "Удалить" }}
 					</Button>
 					<div class="flex gap-2 ml-auto">
 						<Button
@@ -238,7 +238,7 @@
 							@click="$emit('close')"
 							class="w-full sm:w-auto"
 						>
-							Cancel
+							Отмена
 						</Button>
 						<Button
 							type="submit"
@@ -260,7 +260,7 @@
 									d="M5 13l4 4L19 7"
 								/>
 							</svg>
-							{{ loading ? "Saving..." : "Save" }}
+							{{ loading ? "Сохранение..." : "Сохранить" }}
 						</Button>
 					</div>
 				</div>
@@ -327,7 +327,7 @@ async function loadUsers() {
 	try {
 		users.value = await authApi.getUsers();
 	} catch (error) {
-		console.error("Failed to load users:", error);
+		console.error("Не удалось загрузить пользователей:", error);
 	}
 }
 
@@ -393,7 +393,7 @@ async function handleSubmit() {
 		emit("save");
 		emit("update:modelValue", false);
 	} catch (error) {
-		console.error("Failed to save task:", error);
+		console.error("Не удалось сохранить задачу:", error);
 	} finally {
 		loading.value = false;
 	}
@@ -402,7 +402,7 @@ async function handleSubmit() {
 async function handleDelete() {
 	if (!props.task) return;
 
-	if (!confirm("Are you sure you want to delete this task?")) {
+	if (!confirm("Вы уверены, что хотите удалить эту задачу?")) {
 		return;
 	}
 
@@ -412,7 +412,7 @@ async function handleDelete() {
 		emit("delete", props.task.id);
 		emit("update:modelValue", false);
 	} catch (error) {
-		console.error("Failed to delete task:", error);
+		console.error("Не удалось удалить задачу:", error);
 	} finally {
 		deleting.value = false;
 	}

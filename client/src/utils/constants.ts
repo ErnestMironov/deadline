@@ -8,8 +8,8 @@ export const TASK_STATUSES: TaskStatus[] = [
 ]
 
 export const TASK_STATUS_LABELS: Record<TaskStatus, string> = {
-  [TaskStatus.NEW]: 'New',
-  [TaskStatus.IN_PROGRESS]: 'In Progress',
-  [TaskStatus.DONE]: 'Done',
-  [TaskStatus.CANCELLED]: 'Cancelled'
+  [TaskStatus.NEW]: 'Новая',
+  [TaskStatus.IN_PROGRESS]: 'В работе',
+  [TaskStatus.DONE]: 'Выполнена',
+  [TaskStatus.CANCELLED]: 'Отменена'
 }

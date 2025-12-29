@@ -32,7 +32,7 @@ export function useKanban() {
     try {
       await tasksStore.updateTaskStatusOptimistic(taskId, newStatus)
     } catch (error) {
-      console.error('Failed to move task:', error)
+      console.error('Не удалось переместить задачу:', error)
       await loadTasks()
       throw error
     }
@@ -42,7 +42,7 @@ export function useKanban() {
     try {
       await tasksStore.deleteTask(taskId)
     } catch (error) {
-      console.error('Failed to delete task:', error)
+      console.error('Не удалось удалить задачу:', error)
       throw error
     }
   }

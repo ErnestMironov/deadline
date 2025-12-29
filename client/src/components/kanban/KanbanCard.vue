@@ -13,7 +13,7 @@
 				:variant="priorityVariant"
 				class="text-xs flex-shrink-0 font-medium shadow-sm"
 			>
-				{{ task.priority }}
+				{{ priorityLabel }}
 			</Badge>
 		</div>
 		<p
@@ -34,7 +34,7 @@
 			<button
 				@click.stop="$emit('edit')"
 				class="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 hover:bg-primary/10 rounded-md ml-auto cursor-pointer"
-				title="Edit task"
+				title="Редактировать задачу"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -75,5 +75,15 @@ const priorityVariant = computed(() => {
 	if (priority === "high") return "destructive";
 	if (priority === "medium") return "default";
 	return "secondary";
+});
+
+const priorityLabel = computed(() => {
+	const priority = props.task.priority;
+	const labels: Record<string, string> = {
+		low: "Низкий",
+		medium: "Средний",
+		high: "Высокий",
+	};
+	return labels[priority] || priority;
 });
 </script>

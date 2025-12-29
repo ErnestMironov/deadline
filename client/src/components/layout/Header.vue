@@ -22,9 +22,14 @@
 						</svg>
 					</div>
 					<h1
-						class="text-lg sm:text-xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent whitespace-nowrap"
+						:class="[
+							'text-lg sm:text-xl font-bold whitespace-nowrap',
+							isWindowsTheme
+								? 'text-white py-[2px] px-[6px] bg-[#008080]'
+								: 'bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent',
+						]"
 					>
-						DEADLINE
+						ТИКЕТНИЦА
 					</h1>
 				</div>
 				<div class="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
@@ -49,7 +54,7 @@
 								d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
 							/>
 						</svg>
-						<span class="hidden sm:inline">Analytics</span>
+						<span class="hidden sm:inline">Аналитика</span>
 					</Button>
 					<Button
 						v-if="showKanbanButton"
@@ -72,7 +77,7 @@
 								d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
 							/>
 						</svg>
-						<span class="hidden sm:inline">Kanban</span>
+						<span class="hidden sm:inline">Канбан</span>
 					</Button>
 					<Button
 						variant="outline"
@@ -81,8 +86,8 @@
 						class="h-7 px-2 text-xs hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition-colors"
 						:title="
 							isWindowsTheme
-								? 'Switch to default theme'
-								: 'Switch to Windows theme'
+								? 'Переключить на стандартную тему'
+								: 'Переключить на тему Windows'
 						"
 					>
 						<svg
@@ -116,7 +121,7 @@
 							/>
 						</svg>
 						<span class="hidden sm:inline">{{
-							isWindowsTheme ? "Windows" : "Default"
+							isWindowsTheme ? "Windows" : "Стандартная"
 						}}</span>
 					</Button>
 					<Button
@@ -139,7 +144,7 @@
 								d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
 							/>
 						</svg>
-						<span class="hidden sm:inline">Logout</span>
+						<span class="hidden sm:inline">Выйти</span>
 					</Button>
 				</div>
 			</div>

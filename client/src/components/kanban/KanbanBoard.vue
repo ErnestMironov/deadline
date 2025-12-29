@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<FilterBar :filters="filters" @update:filters="updateFilters" />
-		<div v-if="loading" class="text-center py-8">Loading tasks...</div>
+		<div v-if="loading" class="text-center py-8">Загрузка задач...</div>
 		<div v-else-if="error" class="text-center py-8 text-destructive">
 			{{ error }}
 		</div>

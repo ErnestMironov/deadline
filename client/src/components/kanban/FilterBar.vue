@@ -8,8 +8,8 @@
 					style="width: auto; min-width: 120px; max-width: 200px"
 					@update:model-value="handleFilterChange"
 				>
-					<option value="">All assignees</option>
-					<option value="__unassigned__">Unassigned</option>
+					<option value="">Все исполнители</option>
+					<option value="__unassigned__">Не назначен</option>
 					<option
 						v-for="user in users"
 						:key="user.id"
@@ -24,28 +24,28 @@
 					class="h-9 text-xs max-w-[140px]"
 					@update:model-value="handleFilterChange"
 				>
-					<option value="">All priorities</option>
-					<option value="low">Low</option>
-					<option value="medium">Medium</option>
-					<option value="high">High</option>
+					<option value="">Все приоритеты</option>
+					<option value="low">Низкий</option>
+					<option value="medium">Средний</option>
+					<option value="high">Высокий</option>
 				</Select>
 				<Select
 					v-model="localFilters.sort_by"
 					class="h-9 text-xs max-w-[140px]"
 					@update:model-value="handleFilterChange"
 				>
-					<option value="">Sort by...</option>
-					<option value="created_at">Created</option>
-					<option value="updated_at">Updated</option>
-					<option value="title">Title</option>
-					<option value="priority">Priority</option>
+					<option value="">Сортировать по...</option>
+					<option value="created_at">Дате создания</option>
+					<option value="updated_at">Дате обновления</option>
+					<option value="title">Названию</option>
+					<option value="priority">Приоритету</option>
 				</Select>
 				<button
 					v-if="localFilters.sort_by"
 					@click="toggleSortOrder"
 					class="h-9 px-2 rounded-md border border-input bg-white hover:bg-accent text-xs flex items-center gap-1 cursor-pointer transition-colors"
 					:title="
-						localFilters.sort_order === 'asc' ? 'Ascending' : 'Descending'
+						localFilters.sort_order === 'asc' ? 'По возрастанию' : 'По убыванию'
 					"
 				>
 					<svg
@@ -68,7 +68,7 @@
 					v-if="hasActiveFilters"
 					@click="clearFilters"
 					class="h-9 px-2 rounded-md border border-input bg-white hover:bg-accent text-xs flex items-center gap-1 cursor-pointer transition-colors"
-					title="Clear filters"
+					title="Очистить фильтры"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@
 							d="M6 18L18 6M6 6l12 12"
 						/>
 					</svg>
-					<span class="hidden sm:inline">Clear</span>
+					<span class="hidden sm:inline">Очистить</span>
 				</button>
 			</div>
 		</div>
@@ -126,7 +126,7 @@ async function loadUsers() {
 	try {
 		users.value = await authApi.getUsers();
 	} catch (error) {
-		console.error("Failed to load users:", error);
+		console.error("Не удалось загрузить пользователей:", error);
 	}
 }
 

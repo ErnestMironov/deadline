@@ -3,7 +3,7 @@
 		:model-value="modelValue"
 		@update:model-value="handleClose"
 	>
-		<div v-if="loading" class="text-center py-8">Loading task...</div>
+		<div v-if="loading" class="text-center py-8">Загрузка задачи...</div>
 		<div v-else-if="error" class="text-center py-8 text-destructive">
 			{{ error }}
 		</div>
@@ -52,7 +52,7 @@
 							d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
 						/>
 					</svg>
-					Edit
+					Редактировать
 				</Button>
 			</div>
 
@@ -73,7 +73,7 @@
 								d="M4 6h16M4 12h16M4 18h7"
 							/>
 						</svg>
-						Description
+						Описание
 					</label>
 					<p class="text-sm text-foreground whitespace-pre-wrap bg-muted/50 p-3 rounded-md">
 						{{ task.description }}
@@ -97,10 +97,10 @@
 									d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
 								/>
 							</svg>
-							Priority
+							Приоритет
 						</label>
 						<Badge :variant="priorityVariant" class="text-xs font-medium">
-							{{ task.priority }}
+							{{ priorityLabel }}
 						</Badge>
 					</div>
 
@@ -120,7 +120,7 @@
 									d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
 								/>
 							</svg>
-							Status
+							Статус
 						</label>
 						<Badge variant="secondary" class="text-xs font-medium">
 							{{ statusLabel }}
@@ -143,7 +143,7 @@
 									d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
 								/>
 							</svg>
-							Assignee
+							Исполнитель
 						</label>
 						<p class="text-sm text-foreground">{{ task.assignee }}</p>
 					</div>
@@ -164,7 +164,7 @@
 									d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
 								/>
 							</svg>
-							Created
+							Создана
 						</label>
 						<p class="text-sm text-muted-foreground">
 							{{ formatDate(task.created_at) }}
@@ -187,7 +187,7 @@
 									d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
 								/>
 							</svg>
-							Updated
+							Обновлена
 						</label>
 						<p class="text-sm text-muted-foreground">
 							{{ formatDate(task.updated_at) }}
@@ -235,21 +235,32 @@ const priorityVariant = computed(() => {
 	return "secondary";
 });
 
+const priorityLabel = computed(() => {
+	if (!task.value) return "";
+	const priority = task.value.priority;
+	const labels: Record<TaskPriority, string> = {
+		[TaskPriority.LOW]: "Низкий",
+		[TaskPriority.MEDIUM]: "Средний",
+		[TaskPriority.HIGH]: "Высокий",
+	};
+	return labels[priority] || priority;
+});
+
 const statusLabel = computed(() => {
 	if (!task.value) return "";
 	const status = task.value.status;
 	const labels: Record<TaskStatus, string> = {
-		[TaskStatus.NEW]: "New",
-		[TaskStatus.IN_PROGRESS]: "In Progress",
-		[TaskStatus.DONE]: "Done",
-		[TaskStatus.CANCELLED]: "Cancelled",
+		[TaskStatus.NEW]: "Новая",
+		[TaskStatus.IN_PROGRESS]: "В работе",
+		[TaskStatus.DONE]: "Выполнена",
+		[TaskStatus.CANCELLED]: "Отменена",
 	};
 	return labels[status] || status;
 });
 
 function formatDate(dateString: string): string {
 	const date = new Date(dateString);
-	return date.toLocaleDateString("en-US", {
+	return date.toLocaleDateString("ru-RU", {
 		year: "numeric",
 		month: "long",
 		day: "numeric",
@@ -270,7 +281,7 @@ async function loadTask() {
 		task.value = await tasksApi.getTask(props.taskId);
 	} catch (err) {
 		error.value =
-			err instanceof Error ? err.message : "Failed to load task";
+			err instanceof Error ? err.message : "Не удалось загрузить задачу";
 		task.value = null;
 	} finally {
 		loading.value = false;

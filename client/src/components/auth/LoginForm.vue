@@ -1,32 +1,32 @@
 <template>
   <form @submit.prevent="handleSubmit" class="space-y-4">
     <div>
-      <label for="username" class="block text-sm font-medium mb-1">Username</label>
+      <label for="username" class="block text-sm font-medium mb-1">Имя пользователя</label>
       <Input
         id="username"
         v-model="username"
         type="text"
         required
-        placeholder="Enter your username"
+        placeholder="Введите имя пользователя"
       />
     </div>
     <div>
-      <label for="password" class="block text-sm font-medium mb-1">Password</label>
+      <label for="password" class="block text-sm font-medium mb-1">Пароль</label>
       <Input
         id="password"
         v-model="password"
         type="password"
         required
-        placeholder="Enter your password"
+        placeholder="Введите пароль"
       />
     </div>
     <div v-if="error" class="text-sm text-destructive">{{ error }}</div>
     <Button type="submit" :disabled="loading" class="w-full">
-      {{ loading ? 'Logging in...' : 'Login' }}
+      {{ loading ? 'Вход...' : 'Войти' }}
     </Button>
     <div class="text-center text-sm">
-      Don't have an account?
-      <router-link to="/register" class="text-primary hover:underline">Register</router-link>
+      Нет аккаунта?
+      <router-link to="/register" class="text-primary hover:underline">Зарегистрироваться</router-link>
     </div>
   </form>
 </template>
@@ -49,7 +49,7 @@ async function handleSubmit() {
   try {
     await login(username.value, password.value)
   } catch (err) {
-    error.value = err instanceof Error ? err.message : 'Failed to login'
+    error.value = err instanceof Error ? err.message : 'Не удалось войти'
   } finally {
     loading.value = false
   }

@@ -1,17 +1,17 @@
 <template>
   <div class="p-6 space-y-6">
-    <div v-if="loading" class="text-center py-8">Loading analytics...</div>
+    <div v-if="loading" class="text-center py-8">Загрузка аналитики...</div>
     <div v-else-if="error" class="text-center py-8 text-destructive">{{ error }}</div>
     <div v-else class="space-y-6">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card class="p-4">
-          <div class="text-sm text-muted-foreground">Total Tasks</div>
+          <div class="text-sm text-muted-foreground">Всего задач</div>
           <div class="text-2xl font-bold">{{ analytics?.total_tasks || 0 }}</div>
         </Card>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card class="p-4">
-          <h3 class="font-semibold mb-4">Tasks by Status</h3>
+          <h3 class="font-semibold mb-4">Задачи по статусам</h3>
           <div class="space-y-2">
             <div
               v-for="(count, status) in analytics?.by_status"
@@ -29,7 +29,7 @@
           </div>
         </Card>
         <Card class="p-4">
-          <h3 class="font-semibold mb-4">Tasks by Priority</h3>
+          <h3 class="font-semibold mb-4">Задачи по приоритетам</h3>
           <div class="space-y-2">
             <div
               v-for="(count, priority) in analytics?.by_priority"
@@ -48,22 +48,22 @@
         </Card>
       </div>
       <Card class="p-4">
-        <h3 class="font-semibold mb-4">Tasks by Assignee</h3>
+        <h3 class="font-semibold mb-4">Задачи по исполнителям</h3>
         <div class="space-y-2">
           <div
             v-for="(count, assignee) in analytics?.by_assignee"
             :key="assignee"
             class="flex items-center justify-between"
           >
-            <span>{{ assignee || 'Unassigned' }}</span>
+            <span>{{ assignee || 'Не назначен' }}</span>
             <span class="font-medium">{{ count }}</span>
           </div>
         </div>
       </Card>
       <Card class="p-4">
-        <h3 class="font-semibold mb-4">Chart</h3>
-        <img v-if="chartUrl" :src="chartUrl" alt="Tasks Chart" class="w-full" />
-        <div v-else class="text-center text-muted-foreground py-8">Loading chart...</div>
+        <h3 class="font-semibold mb-4">График</h3>
+        <img v-if="chartUrl" :src="chartUrl" alt="График задач" class="w-full" />
+        <div v-else class="text-center text-muted-foreground py-8">Загрузка графика...</div>
       </Card>
     </div>
   </div>
@@ -88,7 +88,7 @@ async function loadAnalytics() {
     const chartBlob = await analyticsApi.getChart()
     chartUrl.value = URL.createObjectURL(chartBlob)
   } catch (err) {
-    error.value = err instanceof Error ? err.message : 'Failed to load analytics'
+    error.value = err instanceof Error ? err.message : 'Не удалось загрузить аналитику'
   } finally {
     loading.value = false
   }
