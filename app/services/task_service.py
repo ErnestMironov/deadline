@@ -19,8 +19,12 @@ def get_tasks(
     
     if status:
         query = query.filter(Task.status == status)
-    if assignee:
-        query = query.filter(Task.assignee == assignee)
+    if assignee is not None:
+        if assignee == "":
+            from sqlalchemy import or_
+            query = query.filter(or_(Task.assignee.is_(None), Task.assignee == ""))
+        else:
+            query = query.filter(Task.assignee == assignee)
     if priority:
         query = query.filter(Task.priority == priority)
     

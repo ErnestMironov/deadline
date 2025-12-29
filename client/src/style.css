@@ -88,6 +88,276 @@
 	--ring: 212.7 26.8% 83.9%;
 }
 
+.windows98-theme {
+	--color-background: #008080;
+	--color-foreground: #000000;
+	--color-card: #c0c0c0;
+	--color-card-foreground: #000000;
+	--color-popover: #c0c0c0;
+	--color-popover-foreground: #000000;
+	--color-primary: #0000ff;
+	--color-primary-foreground: #ffffff;
+	--color-secondary: #c0c0c0;
+	--color-secondary-foreground: #000000;
+	--color-muted: #c0c0c0;
+	--color-muted-foreground: #808080;
+	--color-accent: #c0c0c0;
+	--color-accent-foreground: #000000;
+	--color-destructive: #ff0000;
+	--color-destructive-foreground: #ffffff;
+	--color-border: #808080;
+	--color-input: #ffffff;
+	--color-ring: #0000ff;
+	--radius: 0px;
+
+	--background: 180 100% 25%;
+	--foreground: 0 0% 0%;
+	--card: 0 0% 75%;
+	--card-foreground: 0 0% 0%;
+	--popover: 0 0% 75%;
+	--popover-foreground: 0 0% 0%;
+	--primary: 240 100% 50%;
+	--primary-foreground: 0 0% 100%;
+	--secondary: 0 0% 75%;
+	--secondary-foreground: 0 0% 0%;
+	--muted: 0 0% 75%;
+	--muted-foreground: 0 0% 50%;
+	--accent: 0 0% 75%;
+	--accent-foreground: 0 0% 0%;
+	--destructive: 0 100% 50%;
+	--destructive-foreground: 0 0% 100%;
+	--border: 0 0% 50%;
+	--input: 0 0% 100%;
+	--ring: 240 100% 50%;
+}
+
+.windows98-theme * {
+	border-color: hsl(var(--border));
+}
+
+.windows98-theme body {
+	background-color: #008080 !important;
+	background-image: none !important;
+	font-family: "MS Sans Serif", "Segoe UI", sans-serif;
+}
+
+.windows98-theme html {
+	background-color: #008080 !important;
+}
+
+.windows98-theme * {
+	border-radius: 0 !important;
+}
+
+.windows98-theme [class*="rounded"] {
+	border-radius: 0 !important;
+}
+
+.windows98-theme [class*="backdrop-blur"],
+.windows98-theme [class*="blur"] {
+	backdrop-filter: none !important;
+	filter: none !important;
+}
+
+.windows98-theme [class*="shadow"] {
+	box-shadow: none !important;
+}
+
+.windows98-theme [class*="gradient"] {
+	background-image: none !important;
+}
+
+.windows98-theme [class*="bg-clip-text"] {
+	background-clip: border-box !important;
+	-webkit-background-clip: border-box !important;
+	color: inherit !important;
+	-webkit-text-fill-color: inherit !important;
+}
+
+.windows98-theme [class*="/50"],
+.windows98-theme [class*="/80"],
+.windows98-theme [class*="/70"],
+.windows98-theme [class*="/20"],
+.windows98-theme [class*="/30"],
+.windows98-theme [class*="/60"],
+.windows98-theme [class*="/40"],
+.windows98-theme [class*="/10"],
+.windows98-theme [class*="/5"] {
+	opacity: 1 !important;
+}
+
+.windows98-theme [class*="bg-black/"],
+.windows98-theme [class*="bg-white/"] {
+	opacity: 1 !important;
+}
+
+.windows98-theme .bg-black\/50,
+.windows98-theme [class*="bg-black/50"] {
+	background-color: #000000 !important;
+	opacity: 1 !important;
+}
+
+.windows98-theme [class*="transition"] {
+	transition: none !important;
+}
+
+.windows98-theme .rounded-xl,
+.windows98-theme .rounded-lg,
+.windows98-theme .rounded-md,
+.windows98-theme .rounded-sm,
+.windows98-theme .rounded-full {
+	border-radius: 0 !important;
+}
+
+.windows98-theme [class*="backdrop-blur"],
+.windows98-theme [class*="blur"] {
+	backdrop-filter: none !important;
+	filter: none !important;
+}
+
+.windows98-theme [class*="shadow"],
+.windows98-theme [class*="shadow-"] {
+	box-shadow: none !important;
+}
+
+.windows98-theme [class*="bg-gradient"],
+.windows98-theme [class*="gradient"] {
+	background-image: none !important;
+}
+
+.windows98-theme [class*="bg-gradient-to-br"],
+.windows98-theme [class*="bg-gradient-to-r"] {
+	background-color: #008080 !important;
+	background-image: none !important;
+}
+
+.windows98-theme #app {
+	display: block !important;
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
+.windows98-theme [class*="min-h-screen"] {
+	background-color: #008080 !important;
+}
+
+.windows98-theme [class*="bg-clip-text"] {
+	background-clip: border-box !important;
+	-webkit-background-clip: border-box !important;
+	color: inherit !important;
+}
+
+.windows98-theme [class*="opacity-"],
+.windows98-theme [class*="/50"],
+.windows98-theme [class*="/80"],
+.windows98-theme [class*="/70"],
+.windows98-theme [class*="/20"],
+.windows98-theme [class*="/30"],
+.windows98-theme [class*="/60"],
+.windows98-theme [class*="/40"],
+.windows98-theme [class*="/10"],
+.windows98-theme [class*="/5"] {
+	opacity: 1 !important;
+}
+
+.windows98-theme [class*="bg-black/"] {
+	opacity: 1 !important;
+}
+
+.windows98-theme [class*="bg-white/"] {
+	opacity: 1 !important;
+}
+
+.windows98-theme .bg-white {
+	background-color: #ffffff !important;
+}
+
+.windows98-theme [class*="min-h-screen"].bg-white,
+.windows98-theme .min-h-screen.bg-white {
+	background-color: #008080 !important;
+}
+
+.windows98-theme .bg-black {
+	background-color: #000000 !important;
+}
+
+.windows98-theme .bg-card,
+.windows98-theme [class*="bg-card"] {
+	background-color: #c0c0c0 !important;
+}
+
+.windows98-theme .bg-muted,
+.windows98-theme [class*="bg-muted"] {
+	background-color: #c0c0c0 !important;
+}
+
+.windows98-theme button[class*="bg-primary"],
+.windows98-theme button[class*="bg-secondary"],
+.windows98-theme button[class*="bg-destructive"],
+.windows98-theme button[class*="bg-accent"],
+.windows98-theme button[class*="bg-white"] {
+	background-color: #c0c0c0 !important;
+	background: #c0c0c0 !important;
+}
+
+.windows98-theme [class*="transition"] {
+	transition: none !important;
+}
+
+.windows98-theme ::-webkit-scrollbar {
+	width: 16px;
+	height: 16px;
+}
+
+.windows98-theme ::-webkit-scrollbar-track {
+	background: #c0c0c0;
+	border: 1px solid #808080;
+}
+
+.windows98-theme ::-webkit-scrollbar-thumb {
+	background: #c0c0c0;
+	border: 1px outset #c0c0c0;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
+	border-bottom-color: #808080;
+	border-right-color: #808080;
+}
+
+.windows98-theme ::-webkit-scrollbar-thumb:hover {
+	background: #d4d0c8;
+}
+
+.windows98-theme ::-webkit-scrollbar-button {
+	width: 16px;
+	height: 16px;
+	background: #c0c0c0;
+	border: 1px outset #c0c0c0;
+}
+
+.windows98-theme ::-webkit-scrollbar-button:vertical:start:decrement {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Cpath d='M0 4 L4 0' stroke='%23000000' stroke-width='1'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.windows98-theme ::-webkit-scrollbar-button:vertical:end:increment {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Cpath d='M0 0 L4 4' stroke='%23000000' stroke-width='1'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.windows98-theme ::-webkit-scrollbar-button:horizontal:start:decrement {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Cpath d='M4 0 L0 4' stroke='%23000000' stroke-width='1'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.windows98-theme ::-webkit-scrollbar-button:horizontal:end:increment {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Cpath d='M0 0 L4 4' stroke='%23000000' stroke-width='1'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
 * {
 	border-color: hsl(var(--border));
 }
@@ -95,4 +365,31 @@
 body {
 	background-color: hsl(var(--background));
 	color: hsl(var(--foreground));
+}
+
+.windows98-theme body {
+	background-color: #008080 !important;
+}
+
+/* Custom scrollbar */
+.scrollbar-hide {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+}
+
+/* Smooth transitions */
+* {
+	transition-property:
+		color, background-color, border-color, text-decoration-color, fill, stroke,
+		opacity, box-shadow, transform, filter, backdrop-filter;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+
+.windows98-theme * {
+	transition: none !important;
 }

@@ -1,9 +1,5 @@
 <template>
   <div class="p-6 space-y-6">
-    <div class="flex items-center justify-between">
-      <h1 class="text-2xl font-bold">Analytics</h1>
-      <Button variant="outline" @click="$router.push('/')">Back to Kanban</Button>
-    </div>
     <div v-if="loading" class="text-center py-8">Loading analytics...</div>
     <div v-else-if="error" class="text-center py-8 text-destructive">{{ error }}</div>
     <div v-else class="space-y-6">
@@ -78,7 +74,6 @@ import { ref, onMounted } from 'vue'
 import { analyticsApi } from '@/api/analytics'
 import type { TasksAnalyticsResponse } from '@/types/analytics'
 import Card from '@/components/ui/Card.vue'
-import Button from '@/components/ui/Button.vue'
 
 const analytics = ref<TasksAnalyticsResponse | null>(null)
 const chartUrl = ref<string | null>(null)
