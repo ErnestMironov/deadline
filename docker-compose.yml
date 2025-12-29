@@ -18,5 +18,28 @@ services:
       timeout: 5s
       retries: 5
 
+  backend:
+    build: .
+    container_name: task_tracker_backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/task_tracker
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - .:/app
+
+  client:
+    build: ./client
+    container_name: task_tracker_client
+    ports:
+      - "3000:3000"
+    environment:
+      VITE_API_URL: http://localhost:8000
+    depends_on:
+      - backend
+
 volumes:
   postgres_data:
