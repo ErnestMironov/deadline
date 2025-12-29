@@ -3,10 +3,10 @@
 		<div
 			v-if="modelValue"
 			class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
-			@click.self="$emit('update:modelValue', false)"
 		>
 			<div
 				class="fixed inset-0 bg-black/50 backdrop-blur-sm windows-dialog-backdrop"
+				@click="$emit('update:modelValue', false)"
 			/>
 			<div
 				:class="
@@ -15,6 +15,7 @@
 					)
 				"
 				v-bind="$attrs"
+				@click.stop
 			>
 				<div class="p-4 sm:p-6 max-h-[90vh] overflow-y-auto pb-6">
 					<slot />

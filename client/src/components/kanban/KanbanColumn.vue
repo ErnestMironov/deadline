@@ -18,7 +18,11 @@
     >
       <template #item="{ element }">
         <div :data-task-id="element.id">
-          <KanbanCard :task="element" @click="$emit('task-click', element)" />
+          <KanbanCard 
+            :task="element" 
+            @click="$emit('task-click', element)"
+            @edit="$emit('task-edit', element)"
+          />
         </div>
       </template>
     </draggable>
@@ -68,6 +72,7 @@ const statusColorDot = computed(() => {
 
 const emit = defineEmits<{
   'task-click': [task: TaskResponse]
+  'task-edit': [task: TaskResponse]
   'task-move': [taskId: number, newStatus: TaskStatus]
   'create-task': [status: TaskStatus]
 }>()
