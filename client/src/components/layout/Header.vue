@@ -79,11 +79,8 @@
 						</svg>
 						<span class="hidden sm:inline">Канбан</span>
 					</Button>
-					<Button
-						variant="outline"
-						size="sm"
-						@click="toggleTheme"
-						class="h-7 px-2 text-xs hover:bg-primary/10 hover:border-primary/50 hover:text-primary transition-colors"
+					<div
+						class="flex items-center gap-2 px-2 py-1 rounded-lg border border-border/50 bg-background/50"
 						:title="
 							isWindowsTheme
 								? 'Переключить на стандартную тему'
@@ -91,39 +88,36 @@
 						"
 					>
 						<svg
-							v-if="isWindowsTheme"
 							xmlns="http://www.w3.org/2000/svg"
-							class="w-3.5 h-3.5 sm:mr-1"
-							fill="none"
+							class="w-4 h-4"
+							:class="isWindowsTheme ? 'opacity-40' : 'opacity-100'"
 							viewBox="0 0 24 24"
+							fill="none"
 							stroke="currentColor"
 							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
 						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-							/>
+							<rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+							<circle cx="12" cy="12" r="5" />
 						</svg>
-						<svg
-							v-else
-							xmlns="http://www.w3.org/2000/svg"
-							class="w-3.5 h-3.5 sm:mr-1"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="2"
+						<button
+							@click="toggleTheme"
+							class="relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+							:class="isWindowsTheme ? 'bg-primary' : 'bg-muted'"
 						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+							<span
+								class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-sm"
+								:class="isWindowsTheme ? 'translate-x-4' : 'translate-x-0.5'"
 							/>
-						</svg>
-						<span class="hidden sm:inline">{{
-							isWindowsTheme ? "Windows" : "Стандартная"
-						}}</span>
-					</Button>
+						</button>
+						<img
+							src="/windows.png"
+							alt="Windows"
+							class="w-4 h-4"
+							:class="isWindowsTheme ? 'opacity-100' : 'opacity-40'"
+						/>
+					</div>
 					<Button
 						variant="ghost"
 						size="sm"
